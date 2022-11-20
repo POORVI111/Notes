@@ -104,8 +104,7 @@ class NoteListState extends State<NoteList> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => NoteListHorizontal()));
+            Navigator.of(context).pop();
           }),
       actions: <Widget>[
         IconButton(
