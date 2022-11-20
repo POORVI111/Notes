@@ -8,6 +8,8 @@ import 'package:notes/strings.dart';
 
 import '../Helper/note_widget.dart';
 import '../Model/note.dart';
+import '../colors.dart';
+import 'add_note.dart';
 
 /*
   This class contains notes (not more than 6) that can be scrolled horizontally
@@ -32,13 +34,27 @@ class NoteListHorizontalState extends State<NoteListHorizontal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF2F3F7),
+        backgroundColor: backgroundColor,
         appBar: AppBar(
           title: Text(notes, style: Theme.of(context).textTheme.headline5),
           centerTitle: true,
           elevation: 0,
           shadowColor: Colors.grey,
-          backgroundColor: Color(0xffF2F3F7),
+          backgroundColor: backgroundColor,
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            IconButton(
+              splashRadius: 22,
+              icon: Icon(
+                Icons.add,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => AddNote()));
+              },
+            )
+          ],
         ),
         body: ValueListenableBuilder(
             valueListenable: Hive.box<Note>('Notes').listenable(),
@@ -81,7 +97,7 @@ class NoteListHorizontalState extends State<NoteListHorizontal> {
                   child: NoteWidget(note)),
 
               // to view all notes(>6) --> NoteList
-              if (i == 5)
+              if (i == min(box.values.length,6)-1)
                 Container(
                     height: 250,
                     width: 150,

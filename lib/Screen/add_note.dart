@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:notes/Helper/alert_dialog.dart';
 import 'package:notes/strings.dart';
 import 'package:uuid/uuid.dart';
 
 import '../Model/note.dart';
+import '../colors.dart';
 
 /*
  add a note to hive database
@@ -38,9 +40,9 @@ class _AddNoteState extends State<AddNote> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF2F3F7),
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        backgroundColor: Color(0xffF2F3F7),
+        backgroundColor: backgroundColor,
         elevation: 0,
         title: Text(addNote, style: Theme.of(context).textTheme.headline5),
         centerTitle: true,
@@ -61,7 +63,8 @@ class _AddNoteState extends State<AddNote> {
               color: Colors.black,
             ),
             onPressed: () {
-              if (_noteController.text.trim().isNotEmpty) {
+              if (_noteController.text.trim().isNotEmpty)
+              {
                 var box = Hive.box<Note>(ALL_NOTES);
                 var uuid = Uuid();
                 var note = Note(
@@ -72,8 +75,14 @@ class _AddNoteState extends State<AddNote> {
                 box.add(note);
                 clearText();
                 Navigator.pop(context);
-              } else {
-                // modalWarning(context, 'Title and note is required');
+              }
+              else
+              {
+                // alert in case of empty note
+                alertDialog(
+                    context: context,
+                    title: emptyNote,
+                    message: noteIsRequired);
               }
             },
           )

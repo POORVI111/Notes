@@ -9,6 +9,8 @@ const String addNote ='Add Note';
 const String notes ='Notes';
 const String zeroNoteHorizontalDisplay ="No notes to display";
 const String viewAllNotes ='View all';
+const String emptyNote ='Whoops!';
+const String noteIsRequired ='You have not written anything :0';
 
 
 

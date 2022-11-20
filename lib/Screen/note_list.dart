@@ -7,6 +7,7 @@ import 'package:notes/Helper/note_widget.dart';
 import 'package:notes/Screen/note_horizontal.dart';
 import 'package:notes/strings.dart';
 import '../Model/note.dart';
+import '../colors.dart';
 
 /*
   This class contains all notes in grid view
@@ -28,7 +29,7 @@ class NoteListState extends State<NoteList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffF2F3F7),
+        backgroundColor: backgroundColor,
         appBar: myAppBar(),
         body: ValueListenableBuilder(
             valueListenable: Hive.box<Note>('Notes').listenable(),
@@ -95,7 +96,7 @@ class NoteListState extends State<NoteList> {
       centerTitle: true,
       elevation: 0,
       shadowColor: Colors.grey,
-      backgroundColor: Color(0xffF2F3F7),
+      backgroundColor: backgroundColor,
       leading: IconButton(
           splashRadius: 22,
           icon: const Icon(
